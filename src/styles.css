@@ -208,7 +208,7 @@ body {
 
 .shutter {
   position: absolute;
-  bottom: -3.2rem;
+  top: -3.2rem;
   left: -0.5rem;
   max-height: 0%;
   height: 143%;

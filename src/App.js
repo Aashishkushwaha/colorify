@@ -1,16 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./components/homeComonent";
 import NavBar from "./components/navBarComponent";
 import Footer from "./components/footer";
 import PageNotFound from "./components/pageNotFound";
-import NormalPalleteRow from "./components/normalPalleteRow";
-import GradientPalleteRow from "./components/gradientPalleteRow";
+
 import useAppInit from "./hooks/useAppSetup";
 import CopyContext from "./context/CopyContext";
-
 import "./styles.css";
+
+const Home = React.lazy(() => import("./components/homeComonent"));
+
+const NormalPalleteRow = React.lazy(() =>
+  import("./components/normalPalleteRow")
+);
+const GradientPalleteRow = React.lazy(() =>
+  import("./components/gradientPalleteRow")
+);
 
 export default function App(props) {
   const [
@@ -32,22 +38,28 @@ export default function App(props) {
           </span>
           <Switch>
             <Route path="/normal">
-              <NormalPalleteRow
-                normalPalleteRotate={normalPalleteRotate}
-                currentNormalPallete={currentNormalPallete}
-                generatePallete={generatePallete}
-              />
+              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                <NormalPalleteRow
+                  normalPalleteRotate={normalPalleteRotate}
+                  currentNormalPallete={currentNormalPallete}
+                  generatePallete={generatePallete}
+                />
+              </Suspense>
             </Route>
             <Route path="/gradient">
-              <GradientPalleteRow
-                currentGradientPallete={currentGradientPallete}
-                generatePallete={generatePallete}
-              />
+              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                <GradientPalleteRow
+                  currentGradientPallete={currentGradientPallete}
+                  generatePallete={generatePallete}
+                />
+              </Suspense>
             </Route>
             <Route path="/" exact>
-              <Home />
+              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                <Home />
+              </Suspense>
             </Route>
-            <Route component={PageNotFound}></Route>
+            <Route component={PageNotFound} />
           </Switch>
           <Footer />
         </div>
