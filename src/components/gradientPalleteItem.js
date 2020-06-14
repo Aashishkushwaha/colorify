@@ -12,6 +12,7 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
   };
   let assignedClasses = ["pallete-item", "rounded"];
 
+  const [palleteClasses, setPalleteClasses] = useState(["shutter"]);
   let [copiedLowerSpanClasses, setCopiedLowerSpanClasses] = useState([
     "copied",
     "copied-down",
@@ -20,8 +21,33 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
     "copied",
     "copied-up",
   ]);
+  let [savedSpanClasses, setSavedSpanClasses] = useState([
+    "copied",
+    "copied-down",
+  ]);
+
   let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
   let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
+  let [hasSavedClass, setHasSavedClass] = useState(false);
+
+  useEffect(() => {
+    !hasSavedClass
+      ? setSavedSpanClasses(["copied", "copied-down"])
+      : setSavedSpanClasses(["copied", "copied-down", "show-down"]);
+  }, [hasSavedClass]);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setHasSavedClass(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [savedSpanClasses]);
+
+  const savedHandler = (event) => {
+    event.stopPropagation();
+    setHasSavedClass(true);
+  };
 
   useEffect(() => {
     !lowerSpanHasShowClass
@@ -58,8 +84,6 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
     copyColor(color);
   };
 
-  const [palleteClasses, setPalleteClasses] = useState(["shutter"]);
-
   useEffect(() => {
     let timer = setTimeout(() => {
       setPalleteClasses(["shutter show-shutter"]);
@@ -80,7 +104,11 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
         {primaryBackground}
       </span>
       <div style={style}>
+        <span className="pallete-item__save" onClick={(e) => savedHandler(e)}>
+          +
+        </span>
         <span className={palleteClasses.join(" ")} />
+        <span className={savedSpanClasses.join(" ")}>Saved</span>
         <span className={copiedUpperSpanClasses.join(" ")}>Copied</span>
         <span className={copiedLowerSpanClasses.join(" ")}>Copied</span>
       </div>

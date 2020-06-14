@@ -54,6 +54,11 @@ export default function App(props) {
                 />
               </Suspense>
             </Route>
+            <Route path="/saved">
+              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                <h1>Saved</h1>
+              </Suspense>
+            </Route>
             <Route path="/" exact>
               <Suspense fallback={<h1 className="heading">Loading...</h1>}>
                 <Home />

@@ -16,7 +16,26 @@ const NormalPalleteItem = (props) => {
     "copied",
     "copied-down",
   ]);
+  let [savedSpanClasses, setSavedSpanClasses] = useState([
+    "copied",
+    "copied-down",
+  ]);
   let [hasShowClass, setHasShowClass] = useState(false);
+  let [hasSavedClass, setHasSavedClass] = useState(false);
+
+  useEffect(() => {
+    !hasSavedClass
+      ? setSavedSpanClasses(["copied", "copied-down"])
+      : setSavedSpanClasses(["copied", "copied-down", "show-down"]);
+  }, [hasSavedClass]);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setHasSavedClass(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [savedSpanClasses]);
 
   useEffect(() => {
     !hasShowClass
@@ -32,7 +51,12 @@ const NormalPalleteItem = (props) => {
     return () => clearTimeout(timer);
   }, [copiedSpanClasses]);
 
-  const handler = async (event, color) => {
+  const savedHandler = (event) => {
+    event.stopPropagation();
+    setHasSavedClass(true);
+  };
+
+  const handler = (event, color) => {
     // !hasShowClass ? setHasShowClass(true) : setHasShowClass(false);
     setHasShowClass(true);
     copyColor(color);
@@ -41,6 +65,10 @@ const NormalPalleteItem = (props) => {
   return (
     <div className={assignedClasses.join(" ")}>
       <div style={style} onClick={(event) => handler(event, props.background)}>
+        <span className="pallete-item__save" onClick={(e) => savedHandler(e)}>
+          +
+        </span>
+        <span className={savedSpanClasses.join(" ")}>Saved</span>
         <span className={copiedSpanClasses.join(" ")}>Copied</span>
       </div>
       <span style={{ color: props.background }}>{props.background}</span>
