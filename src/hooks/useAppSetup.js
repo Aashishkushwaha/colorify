@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useAppInit = () => {
   const [normalPalleteRotate, setNormalPalleteRotate] = useState("rotate-left");
@@ -67,12 +67,8 @@ const useAppInit = () => {
   };
 
   const generatePallete = (palleteType) => {
-    let res =
-      palleteType === "normal"
-        ? normalPalleteHandler()
-        : palleteType === "gradient"
-        ? gradientPalleteHandler()
-        : null;
+    if (palleteType === "normal") normalPalleteHandler();
+    else if (palleteType === "gradient") gradientPalleteHandler();
   };
 
   return [

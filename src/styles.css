@@ -50,6 +50,30 @@ body {
 .App {
   font-family: sans-serif;
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0rem;
+  padding: 0 0 0.4rem 0;
+  color: #fff;
+  width: 100%;
+  margin-top: 4rem;
+  background: linear-gradient(to right bottom, #417447, #6fd88d);
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffd61e;
+  padding-bottom: 0.05rem;
+  border-bottom: 0.4rem solid transparent;
+}
+
+.footer a:hover,
+.footer a:visited,
+.footer a:active {
+  border-bottom: 0.1rem solid #ffd61e;
 }
 
 .grid {
@@ -93,7 +117,6 @@ body {
   background: linear-gradient(to right bottom, #417447, #6fd88d);
   -webkit-background-clip: text;
   color: transparent;
-  font-weight: 700;
 }
 
 .mb-1 {
@@ -110,6 +133,10 @@ body {
 
 .mt-4 {
   margin-top: 4rem;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .btn {
