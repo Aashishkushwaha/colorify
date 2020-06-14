@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import NormalPalleteItem from "./normalPalleteItem";
 import GradientPalleteItem from "./gradientPalleteItem";
 
-export default props => {
+export default (props) => {
   return (
     <div className="home-grid">
       <div>
@@ -12,7 +12,7 @@ export default props => {
           style={{
             color: "dodgerblue",
             marginTop: "1rem",
-            marginBottom: "1rem"
+            marginBottom: "1rem",
           }}
         >
           <Link className="main-header__list-item" to="/normal">
@@ -31,10 +31,10 @@ export default props => {
             color: "transparent",
             WebkitBackgroundClip: "text",
             marginTop: "1rem",
-            marginBottom: "1rem"
+            marginBottom: "1rem",
           }}
         >
-          <Link className="main-header__list-item" to="/normal">
+          <Link className="main-header__list-item" to="/gradient">
             ► Discover Gradient Colors
           </Link>
         </h2>
