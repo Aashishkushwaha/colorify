@@ -1,19 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 
-const NormalPalleteItem = props => {
+const NormalPalleteItem = (props) => {
   const { copyColor } = useContext(CopyContext);
   let style = {
     display: "flex",
     flexDirection: "column",
     justifyContent: props.gradient ? "space-between" : "center",
     alignItems: "center",
-    background: props.background
+    background: props.background,
   };
   let assignedClasses = ["pallete-item", "rounded", "rotate", props.rotate];
   let [copiedSpanClasses, setCopiedSpanClasses] = useState([
     "copied",
-    "copied-down"
+    "copied-down",
   ]);
   let [hasShowClass, setHasShowClass] = useState(false);
 
@@ -39,15 +39,10 @@ const NormalPalleteItem = props => {
 
   return (
     <div className={assignedClasses.join(" ")}>
-      <div style={style}>
+      <div style={style} onClick={(event) => handler(event, props.background)}>
         <span className={copiedSpanClasses.join(" ")}>Copied</span>
       </div>
-      <span
-        onClick={event => handler(event, props.background)}
-        style={{ color: props.background }}
-      >
-        {props.background}
-      </span>
+      <span style={{ color: props.background }}>{props.background}</span>
     </div>
   );
 };

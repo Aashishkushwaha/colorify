@@ -9,6 +9,7 @@
 body {
   background: #e8edf3;
   padding: 1.5rem 0;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .main-header {
@@ -17,7 +18,8 @@ body {
   left: 0;
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(to right, #23b699, #267a91);
+  /* background: linear-gradient(to right, #23b699, #267a91); */
+  background: rgb(58, 58, 58);
   color: #fff;
   z-index: 2;
 }
@@ -48,7 +50,6 @@ body {
 }
 
 .App {
-  font-family: sans-serif;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -60,7 +61,8 @@ body {
   color: #fff;
   width: 100%;
   margin-top: 4rem;
-  background: linear-gradient(to right bottom, #417447, #6fd88d);
+  /* background: linear-gradient(to right bottom, #e6ffe9, #6fd88d); */
+  background: rgb(58, 58, 58);
 }
 
 .footer a {
@@ -97,6 +99,11 @@ body {
   padding: 0.5rem;
   background: #fff;
   transition: all 0.4s;
+}
+
+.pallete-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.15);
 }
 
 .pallete-item > div {
