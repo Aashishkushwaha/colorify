@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const useAppInit = () => {
   const [normalPalleteRotate, setNormalPalleteRotate] = useState("rotate-left");
+  const [savedPalleteItems, setSavedPalleteItems] = useState(
+    JSON.parse(localStorage.getItem("savedPalleteItems")) || []
+  );
   const [currentNormalPallete, setCurrentNormalPallete] = useState([
     "#414141",
     "#ba23a1",
@@ -77,6 +80,8 @@ const useAppInit = () => {
     currentNormalPallete,
     generatePallete,
     currentGradientPallete,
+    savedPalleteItems,
+    setSavedPalleteItems,
   ];
 };
 

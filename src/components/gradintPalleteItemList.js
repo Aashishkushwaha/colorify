@@ -21,12 +21,3 @@ const GradientPalleteItemList = ({ palletes }) => {
 };
 
 export default GradientPalleteItemList;
-
-/**
- * 
- * //@media screen and (min-width: 1330px) {
-//  .pallete-item > div {
-//    padding: 10rem 0;
-//  }
-//}
- */

@@ -21,6 +21,11 @@ export default (props) => {
               Gradient
             </NavLink>
           </li>
+          <li>
+            <NavLink className="main-header__list-item" to="/saved">
+              Saved
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
