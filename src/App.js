@@ -1,0 +1,120 @@
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import NavBar from "./components/NavBar";
+import NormalPalleteRow from "./components/normalPalleteRow";
+import GradientPalleteRow from "./components/gradientPalleteRow";
+import CopyContext from "./context/CopyContext";
+
+import "./styles.css";
+import Home from "./components/Home";
+
+export default function App(props) {
+  const [normalPalleteRotate, setNormalPalleteRotate] = useState("rotate-left");
+  const [gradientPalleteRotate, setGradientPalleteRotate] = useState(
+    "rotate-left"
+  );
+  const [currentNormalPallete, setCurrentNormalPallete] = useState([
+    "#414141",
+    "#ba23a1",
+    "#48b124",
+    "#b1449c",
+    "#b123ff",
+    "#1f2a71",
+    "#9ac619",
+    "#f112fa",
+    "#1af547",
+    "#ba45"
+  ]);
+  const [currentGradientPallete, setCurrentGradientPallete] = useState([
+    ["#414141", "#b14a67"],
+    ["#ba23a1", "#1b5a98"],
+    ["#48b124", "#11a9f1"],
+    ["#b1449c", "#7788a7"],
+    ["#b123ff", "#90acf1"],
+    ["#c12356", "#1cf341"],
+    ["#23a1ff", "#985af1"],
+    ["#f56ac1", "#6a9f1a"],
+    ["#41ca3c", "#77cc17"],
+    ["#aab31f", "#10b1ab"]
+  ]);
+  // const [currentShadesPallete, setCurrentShadesPallete] = useState([
+  //   "#414141",
+  //   "#ba23a1",
+  //   "#48b124",
+  //   "#b1449c",
+  //   "#b123ff"
+  // ]);
+
+  const copyColor = color => {
+    var tempInput = document.createElement("input");
+    tempInput.value = color;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+  };
+
+  const generateColor = () => {
+    return (
+      "#" +
+      Math.floor(Math.random() * 255).toString(16) +
+      Math.floor(Math.random() * 255).toString(16) +
+      Math.floor(Math.random() * 255).toString(16)
+    );
+  };
+
+  const normalPalleteHandler = () => {
+    setNormalPalleteRotate(
+      normalPalleteRotate === "rotate-left" ? "rotate-right" : "rotate-left"
+    );
+    setCurrentNormalPallete(Array.from({ length: 10 }, generateColor));
+  };
+
+  const gradientPalleteHandler = () => {
+    setGradientPalleteRotate(
+      gradientPalleteRotate === "rotate-left" ? "rotate-right" : "rotate-left"
+    );
+    setCurrentGradientPallete(
+      Array.from({ length: 10 }, () => [generateColor(), generateColor()])
+    );
+  };
+
+  const generatePallete = palleteType => {
+    let res =
+      palleteType === "normal"
+        ? normalPalleteHandler()
+        : palleteType === "gradient"
+        ? gradientPalleteHandler()
+        : null;
+  };
+
+  return (
+    <Router>
+      <NavBar />
+      <CopyContext.Provider value={{ copyColor }}>
+        <div className="App">
+          {/* <h3 className="heading mb-1 mt-3">Colorify</h3> */}
+          <h3 className="heading mb-1 mt-3">Colorify</h3>
+          <Route path="/normal">
+            <NormalPalleteRow
+              normalPalleteRotate={normalPalleteRotate}
+              currentNormalPallete={currentNormalPallete}
+              generatePallete={generatePallete}
+            />
+          </Route>
+          <Route path="/gradient">
+            <GradientPalleteRow
+              gradientPalleteRotate={gradientPalleteRotate}
+              currentGradientPallete={currentGradientPallete}
+              generatePallete={generatePallete}
+            />
+          </Route>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+        </div>
+      </CopyContext.Provider>
+    </Router>
+  );
+}
