@@ -1,8 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
+import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
 
-const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
+const GradientPalleteItem = ({
+  primaryBackground,
+  secondaryBackground,
+  removeSavedPalleteItem,
+  index,
+}) => {
   const { copyColor } = useContext(CopyContext);
+  const { savedPalleteItems, setSavedPalleteItems } = useContext(
+    SavedPalleteItemsContext
+  );
+
   let style = {
     display: "flex",
     flexDirection: "column",
@@ -45,6 +55,17 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
   }, [savedSpanClasses]);
 
   const savedHandler = (event) => {
+    setSavedPalleteItems([
+      ...savedPalleteItems,
+      [primaryBackground, secondaryBackground],
+    ]);
+    localStorage.setItem(
+      "savedPalleteItems",
+      JSON.stringify([
+        ...savedPalleteItems,
+        [primaryBackground, secondaryBackground],
+      ])
+    );
     event.stopPropagation();
     setHasSavedClass(true);
   };
@@ -95,6 +116,15 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
     };
   }, [primaryBackground, secondaryBackground]);
 
+  const deleteHandler = (event, index) => {
+    let newArray = savedPalleteItems.filter(
+      (item, currentIndex) => currentIndex !== index
+    );
+    setSavedPalleteItems(newArray);
+    localStorage.setItem("savedPalleteItems", JSON.stringify(newArray));
+    event.stopPropagation();
+  };
+
   return (
     <div className={assignedClasses.join(" ")} style={{ position: "relative" }}>
       <span
@@ -104,8 +134,15 @@ const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
         {primaryBackground}
       </span>
       <div style={style}>
-        <span className="pallete-item__save" onClick={(e) => savedHandler(e)}>
-          +
+        <span
+          className="pallete-item__save"
+          onClick={(e) => {
+            return removeSavedPalleteItem
+              ? deleteHandler(e, index)
+              : savedHandler(e);
+          }}
+        >
+          {removeSavedPalleteItem ? "-" : "+"}
         </span>
         <span className={palleteClasses.join(" ")} />
         <span className={savedSpanClasses.join(" ")}>Saved</span>

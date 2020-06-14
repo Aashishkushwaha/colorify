@@ -9,9 +9,9 @@ const NormalPalleteItemList = ({ palletes, rotate }) => {
     palletesCopy = palletesCopy.splice(0, 6);
   else if (window.innerWidth < 791) palletesCopy = palletesCopy.splice(0, 4);
 
-  return palletesCopy.map((pallate, index) => {
+  return palletesCopy.map((pallete, index) => {
     return (
-      <NormalPalleteItem key={index} rotate={rotate} background={pallate} />
+      <NormalPalleteItem key={index} rotate={rotate} background={pallete} />
     );
   });
 };

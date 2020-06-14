@@ -7,9 +7,14 @@ import PageNotFound from "./components/pageNotFound";
 
 import useAppInit from "./hooks/useAppSetup";
 import CopyContext from "./context/CopyContext";
+import SavedPalleteItemsContext from "./context/SavedPalleteItemsContext";
 import "./styles.css";
 
 const Home = React.lazy(() => import("./components/homeComonent"));
+
+const SavedPalleteItems = React.lazy(() =>
+  import("./components/savedPalleteItems")
+);
 
 const NormalPalleteRow = React.lazy(() =>
   import("./components/normalPalleteRow")
@@ -25,50 +30,56 @@ export default function App(props) {
     currentNormalPallete,
     generatePallete,
     currentGradientPallete,
+    savedPalleteItems,
+    setSavedPalleteItems,
   ] = useAppInit();
 
   return (
     <Router>
       <NavBar />
-      <CopyContext.Provider value={{ copyColor }}>
-        <div className="App">
-          <h3 className="heading mt-3">Colorify</h3>
-          <span className="heading mb-1 inline-block">
-            Perfect destination for delightful colors.
-          </span>
-          <Switch>
-            <Route path="/normal">
-              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
-                <NormalPalleteRow
-                  normalPalleteRotate={normalPalleteRotate}
-                  currentNormalPallete={currentNormalPallete}
-                  generatePallete={generatePallete}
-                />
-              </Suspense>
-            </Route>
-            <Route path="/gradient">
-              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
-                <GradientPalleteRow
-                  currentGradientPallete={currentGradientPallete}
-                  generatePallete={generatePallete}
-                />
-              </Suspense>
-            </Route>
-            <Route path="/saved">
-              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
-                <h1>Saved</h1>
-              </Suspense>
-            </Route>
-            <Route path="/" exact>
-              <Suspense fallback={<h1 className="heading">Loading...</h1>}>
-                <Home />
-              </Suspense>
-            </Route>
-            <Route component={PageNotFound} />
-          </Switch>
-          <Footer />
-        </div>
-      </CopyContext.Provider>
+      <SavedPalleteItemsContext.Provider
+        value={{ savedPalleteItems, setSavedPalleteItems }}
+      >
+        <CopyContext.Provider value={{ copyColor }}>
+          <div className="App">
+            <h3 className="heading mt-3">Colorify</h3>
+            <span className="heading mb-1 inline-block">
+              Perfect destination for delightful colors.
+            </span>
+            <Switch>
+              <Route path="/normal">
+                <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                  <NormalPalleteRow
+                    normalPalleteRotate={normalPalleteRotate}
+                    currentNormalPallete={currentNormalPallete}
+                    generatePallete={generatePallete}
+                  />
+                </Suspense>
+              </Route>
+              <Route path="/gradient">
+                <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                  <GradientPalleteRow
+                    currentGradientPallete={currentGradientPallete}
+                    generatePallete={generatePallete}
+                  />
+                </Suspense>
+              </Route>
+              <Route path="/saved">
+                <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                  <SavedPalleteItems palletes={savedPalleteItems} />
+                </Suspense>
+              </Route>
+              <Route path="/" exact>
+                <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                  <Home />
+                </Suspense>
+              </Route>
+              <Route component={PageNotFound} />
+            </Switch>
+            <Footer />
+          </div>
+        </CopyContext.Provider>
+      </SavedPalleteItemsContext.Provider>
     </Router>
   );
 }
