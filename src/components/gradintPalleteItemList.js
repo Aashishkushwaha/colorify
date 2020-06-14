@@ -1,7 +1,7 @@
 import React from "react";
 import GradientPalleteItem from "./gradientPalleteItem";
 
-const GradientPalleteItemList = ({ palletes, rotate }) => {
+const GradientPalleteItemList = ({ palletes }) => {
   let palletesCopy = [...palletes];
   if (window.innerWidth > 1060 && window.innerWidth < 1330)
     palletesCopy = palletesCopy.splice(0, 8);
@@ -12,7 +12,6 @@ const GradientPalleteItemList = ({ palletes, rotate }) => {
   return palletesCopy.map((pallete, index) => {
     return (
       <GradientPalleteItem
-        rotate={rotate}
         key={index}
         primaryBackground={pallete[0]}
         secondaryBackground={pallete[1]}

@@ -1,28 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 
-const GradientPalleteItem = ({
-  primaryBackground,
-  secondaryBackground,
-  rotate
-}) => {
+const GradientPalleteItem = ({ primaryBackground, secondaryBackground }) => {
   const { copyColor } = useContext(CopyContext);
   let style = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    background: `linear-gradient(to bottom right, ${primaryBackground}, ${secondaryBackground})`
+    background: `linear-gradient(to bottom right, ${primaryBackground}, ${secondaryBackground})`,
   };
-  let assignedClasses = ["pallete-item", "rounded", "rotate", rotate];
+  let assignedClasses = ["pallete-item", "rounded"];
 
   let [copiedLowerSpanClasses, setCopiedLowerSpanClasses] = useState([
     "copied",
-    "copied-down"
+    "copied-down",
   ]);
   let [copiedUpperSpanClasses, setCopiedUpperSpanClasses] = useState([
     "copied",
-    "copied-up"
+    "copied-up",
   ]);
   let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
   let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
@@ -56,27 +52,40 @@ const GradientPalleteItem = ({
   }, [copiedLowerSpanClasses]);
 
   const handler = async (event, color, copyType) => {
-    // !lowerSpanHasShowClass ? setLowerSpanHasShowClass(true) : setLowerSpanHasShowClass(false);
     copyType === "lower"
       ? setLowerSpanHasShowClass(true)
       : setUpperSpanHasShowClass(true);
     copyColor(color);
   };
 
+  const [palleteClasses, setPalleteClasses] = useState(["shutter"]);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setPalleteClasses(["shutter show-shutter"]);
+    }, 50);
+
+    return () => {
+      setPalleteClasses(["shutter"]);
+      clearTimeout(timer);
+    };
+  }, [primaryBackground, secondaryBackground]);
+
   return (
-    <div className={assignedClasses.join(" ")}>
+    <div className={assignedClasses.join(" ")} style={{ position: "relative" }}>
       <span
-        onClick={event => handler(event, primaryBackground, "upper")}
+        onClick={(event) => handler(event, primaryBackground, "upper")}
         style={{ color: primaryBackground }}
       >
         {primaryBackground}
       </span>
       <div style={style}>
+        <span className={palleteClasses.join(" ")} />
         <span className={copiedUpperSpanClasses.join(" ")}>Copied</span>
         <span className={copiedLowerSpanClasses.join(" ")}>Copied</span>
       </div>
       <span
-        onClick={event => handler(event, secondaryBackground, "lower")}
+        onClick={(event) => handler(event, secondaryBackground, "lower")}
         style={{ color: secondaryBackground }}
       >
         {secondaryBackground}

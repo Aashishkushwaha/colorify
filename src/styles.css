@@ -172,6 +172,34 @@ body {
   animation: show-up 0.8s ease-in-out forwards;
 }
 
+.shutter {
+  position: absolute;
+  bottom: -3.2rem;
+  left: -0.5rem;
+  max-height: 0%;
+  height: 143%;
+  border-radius: 0.4rem;
+  background: #fff;
+  width: 106%;
+  transition: all 0.4s;
+}
+
+.show-shutter {
+  animation: shutter 0.5s ease-in-out;
+}
+
+@keyframes shutter {
+  20% {
+    max-height: 143%;
+    opacity: 1;
+  }
+
+  100% {
+    max-height: 0%;
+    opacity: 0.8;
+  }
+}
+
 @keyframes show-up {
   0% {
     opacity: 1;

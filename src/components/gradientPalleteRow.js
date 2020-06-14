@@ -1,18 +1,11 @@
 import React from "react";
 import GradientPalleteItemList from "./gradintPalleteItemList";
 
-const GradientPalleteRow = ({
-  gradientPalleteRotate,
-  currentGradientPallete,
-  generatePallete
-}) => {
+const GradientPalleteRow = ({ currentGradientPallete, generatePallete }) => {
   return (
     <div>
       <div className="grid">
-        <GradientPalleteItemList
-          rotate={gradientPalleteRotate}
-          palletes={currentGradientPallete}
-        />
+        <GradientPalleteItemList palletes={currentGradientPallete} />
       </div>
       <button
         className="btn btn-blue rounded"
