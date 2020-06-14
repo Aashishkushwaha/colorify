@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-const NavBar = (props) => {
+export default (props) => {
   return (
     <header className="main-header">
       <nav className="main-header__nav">
@@ -26,5 +26,3 @@ const NavBar = (props) => {
     </header>
   );
 };
-
-export default NavBar;

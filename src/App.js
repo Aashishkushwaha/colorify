@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./components/home";
-import NavBar from "./components/navBar";
+import Home from "./components/homeComonent";
+import NavBar from "./components/navBarComponent";
 import Footer from "./components/footer";
 import PageNotFound from "./components/pageNotFound";
 import NormalPalleteRow from "./components/normalPalleteRow";
