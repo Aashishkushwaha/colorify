@@ -9,6 +9,7 @@ const NormalPalleteItem = (props) => {
     justifyContent: props.gradient ? "space-between" : "center",
     alignItems: "center",
     background: props.background,
+    cursor: "pointer",
   };
   let assignedClasses = ["pallete-item", "rounded", "rotate", props.rotate];
   let [copiedSpanClasses, setCopiedSpanClasses] = useState([
