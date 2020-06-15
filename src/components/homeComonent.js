@@ -7,10 +7,10 @@ export default (props) => {
   return (
     <div className="home-grid">
       <div>
-        <NormalPalleteItem background="dodgerblue" />
+        <NormalPalleteItem background="#d9d087" />
         <h2
           style={{
-            color: "dodgerblue",
+            color: "#d9d087",
             marginTop: "1rem",
             marginBottom: "1rem",
           }}
@@ -22,12 +22,12 @@ export default (props) => {
       </div>
       <div>
         <GradientPalleteItem
-          primaryBackground="dodgerblue"
-          secondaryBackground="tomato"
+          primaryBackground="#61f3c3"
+          secondaryBackground="#4772b2"
         />
         <h2
           style={{
-            background: `linear-gradient(to right, dodgerblue, tomato)`,
+            background: `linear-gradient(to right, #61f3c3, #4772b2)`,
             color: "transparent",
             WebkitBackgroundClip: "text",
             marginTop: "1rem",
