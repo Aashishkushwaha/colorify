@@ -23,6 +23,10 @@ const GradientPalleteRow = React.lazy(() =>
   import("./components/gradientPalleteRow")
 );
 
+const CustomPalleteItem = React.lazy(() =>
+  import("./components/customPalleteItem")
+);
+
 export default function App(props) {
   const [
     copyColor,
@@ -62,6 +66,11 @@ export default function App(props) {
                     currentGradientPallete={currentGradientPallete}
                     generatePallete={generatePallete}
                   />
+                </Suspense>
+              </Route>
+              <Route path="/custom">
+                <Suspense fallback={<h1 className="heading">Loading...</h1>}>
+                  <CustomPalleteItem />
                 </Suspense>
               </Route>
               <Route path="/saved">
