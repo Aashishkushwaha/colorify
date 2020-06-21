@@ -2,30 +2,24 @@ import React, { useContext, useState, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
 
-const GradientPalleteItem = ({
-  index,
-  disableLock,
-  primaryBackground,
-  secondaryBackground,
-  removeSavedPalleteItem,
-}) => {
+const CustomPalleteItem = ({ removeSavedPalleteItem, index }) => {
+  const [primaryBackground, setPrimaryBackground] = useState("#1fe5a7");
+  const [secondaryBackground, setSecondaryBackground] = useState("#1b5a98");
+
   const { copyColor } = useContext(CopyContext);
   const { savedPalleteItems, setSavedPalleteItems } = useContext(
     SavedPalleteItemsContext
   );
-  const [isLocked, setIsLocked] = useState(false);
-  let [hasSavedClass, setHasSavedClass] = useState(false);
-  let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
-  let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
-  const [originalPrimaryBackground, setOriginalPrimaryBackground] = useState(
-    ""
-  );
-  const [
-    originalSecondaryBackground,
-    setOriginalSecondaryBackground,
-  ] = useState("");
 
-  const [palleteClasses, setPalleteClasses] = useState(["shutter"]);
+  let style = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: `linear-gradient(to bottom, ${primaryBackground}, ${secondaryBackground})`,
+  };
+  let assignedClasses = ["pallete-item", "rounded"];
+
   let [copiedLowerSpanClasses, setCopiedLowerSpanClasses] = useState([
     "copied",
     "copied-down",
@@ -39,15 +33,9 @@ const GradientPalleteItem = ({
     "copied-down",
   ]);
 
-  let style = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    background: `linear-gradient(to bottom right, ${originalPrimaryBackground}, ${originalSecondaryBackground})`,
-  };
-
-  let assignedClasses = ["pallete-item", "rounded"];
+  let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
+  let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
+  let [hasSavedClass, setHasSavedClass] = useState(false);
 
   useEffect(() => {
     !hasSavedClass
@@ -114,22 +102,6 @@ const GradientPalleteItem = ({
     copyColor(color);
   };
 
-  useEffect(() => {
-    if (!isLocked) {
-      setOriginalPrimaryBackground(primaryBackground);
-      setOriginalSecondaryBackground(secondaryBackground);
-    }
-
-    let timer = setTimeout(() => {
-      setPalleteClasses(["shutter show-shutter"]);
-    }, 50);
-
-    return () => {
-      setPalleteClasses(["shutter"]);
-      clearTimeout(timer);
-    };
-  }, [primaryBackground, secondaryBackground]);
-
   const deleteHandler = (event, index) => {
     let newArray = savedPalleteItems.filter(
       (item, currentIndex) => currentIndex !== index
@@ -140,50 +112,55 @@ const GradientPalleteItem = ({
   };
 
   return (
-    <div className={assignedClasses.join(" ")} style={{ position: "relative" }}>
-      <span
-        onClick={(event) => handler(event, originalPrimaryBackground, "upper")}
-        style={{ color: originalPrimaryBackground }}
+    <div style={{ width: "20rem", margin: "0 auto", marginTop: "1.2rem" }}>
+      <input
+        type="color"
+        name="primary"
+        id="primaryBackground"
+        value={primaryBackground}
+        onChange={(e) => setPrimaryBackground(e.target.value)}
+      />
+      <div
+        className={assignedClasses.join(" ")}
+        style={{ position: "relative" }}
       >
-        {originalPrimaryBackground}
-      </span>
-      <div style={style}>
-        {!disableLock && (
+        <span
+          onClick={(event) => handler(event, primaryBackground, "upper")}
+          style={{ color: "#4c4c4c" }}
+        >
+          {primaryBackground}
+        </span>
+        <div style={style}>
           <span
-            className="lock__unlock"
+            className="pallete-item__save"
             onClick={(e) => {
-              e.stopPropagation();
-              setIsLocked(!isLocked);
+              return removeSavedPalleteItem
+                ? deleteHandler(e, index)
+                : savedHandler(e);
             }}
           >
-            {isLocked ? "Unlock" : "Lock"}
+            {removeSavedPalleteItem ? "-" : "+"}
           </span>
-        )}
+          <span className={savedSpanClasses.join(" ")}>Saved</span>
+          <span className={copiedUpperSpanClasses.join(" ")}>Copied</span>
+          <span className={copiedLowerSpanClasses.join(" ")}>Copied</span>
+        </div>
         <span
-          className="pallete-item__save"
-          onClick={(e) => {
-            return removeSavedPalleteItem
-              ? deleteHandler(e, index)
-              : savedHandler(e);
-          }}
+          onClick={(event) => handler(event, secondaryBackground, "lower")}
+          style={{ color: "#4c4c4c" }}
         >
-          {removeSavedPalleteItem ? "-" : "+"}
+          {secondaryBackground}
         </span>
-        <span className={palleteClasses.join(" ")} />
-        <span className={savedSpanClasses.join(" ")}>Saved</span>
-        <span className={copiedUpperSpanClasses.join(" ")}>Copied</span>
-        <span className={copiedLowerSpanClasses.join(" ")}>Copied</span>
       </div>
-      <span
-        onClick={(event) =>
-          handler(event, originalSecondaryBackground, "lower")
-        }
-        style={{ color: originalSecondaryBackground }}
-      >
-        {originalSecondaryBackground}
-      </span>
+      <input
+        type="color"
+        name="secondary"
+        id="secondaryBackground"
+        value={secondaryBackground}
+        onChange={(e) => setSecondaryBackground(e.target.value)}
+      />
     </div>
   );
 };
 
-export default GradientPalleteItem;
+export default CustomPalleteItem;

@@ -4,7 +4,7 @@ import NormalPallateItemList from "./normalPalleteItemList";
 const NormalPalleteRow = ({
   normalPalleteRotate,
   currentNormalPallete,
-  generatePallete
+  generatePallete,
 }) => {
   return (
     <div>
@@ -18,7 +18,7 @@ const NormalPalleteRow = ({
         className="btn btn-blue rounded"
         onClick={() => generatePallete("normal")}
       >
-        Next
+        Generate Pallete
       </button>
     </div>
   );

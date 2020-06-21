@@ -2,14 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
 
-const NormalPalleteItem = ({
+const ShadesPalleteItem = ({
   disableLock,
   background,
-  rotate,
   index,
   removeSavedPalleteItem,
 }) => {
-  const { copyColor } = useContext(CopyContext);
+  const { copyColor, getHexCode } = useContext(CopyContext);
   const { savedPalleteItems, setSavedPalleteItems } = useContext(
     SavedPalleteItemsContext
   );
@@ -29,11 +28,12 @@ const NormalPalleteItem = ({
   let style = {
     display: "flex",
     flexDirection: "column",
+    padding: "0",
     alignItems: "center",
     background: originalBackground,
     cursor: "pointer",
   };
-  let assignedClasses = ["pallete-item", "rounded", "rotate", rotate];
+  let assignedClasses = ["pallete-item", "rounded"];
 
   useEffect(() => {
     !hasSavedClass
@@ -92,14 +92,19 @@ const NormalPalleteItem = ({
   };
 
   return (
-    <div className={assignedClasses.join(" ")}>
-      <div
-        style={style}
-        onClick={(event) => handler(event, originalBackground)}
-      >
+    <div
+      className={assignedClasses.join(" ")}
+      style={{ paddingBottom: "2.8rem" }}
+    >
+      <div style={style}>
         {!disableLock && (
           <span
-            className="lock__unlock"
+            style={{
+              background: "#414141",
+              color: "#fff",
+              marginBottom: ".5rem",
+            }}
+            className="lock__unlock rounded"
             onClick={(e) => {
               e.stopPropagation();
               setIsLocked(!isLocked);
@@ -108,7 +113,42 @@ const NormalPalleteItem = ({
             {isLocked ? "Unlock" : "Lock"}
           </span>
         )}
+        {new Array(10).fill(1).map((el, index) => (
+          <span
+            key={index}
+            onClick={(event) =>
+              handler(
+                event,
+                "#" +
+                  getHexCode(originalBackground[0]) +
+                  getHexCode(originalBackground[1]) +
+                  getHexCode(originalBackground[2]) +
+                  Math.floor(((index + 1) / 10) * 255).toString(16)
+              )
+            }
+            style={{
+              fontWeight: "700",
+              padding: ".5rem",
+              display: "block",
+              width: "100%",
+              background: `rgb(${originalBackground[0]}, ${
+                originalBackground[1]
+              }, ${originalBackground[2]}, ${(index + 1) / 10})`,
+            }}
+          >
+            #
+            {getHexCode(originalBackground[0]) +
+              getHexCode(originalBackground[1]) +
+              getHexCode(originalBackground[2]) +
+              Math.floor(((index + 1) / 10) * 255).toString(16)}
+          </span>
+        ))}
         <span
+          style={{
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: "20",
+          }}
           className="pallete-item__save"
           onClick={(e) => {
             return removeSavedPalleteItem
@@ -118,12 +158,21 @@ const NormalPalleteItem = ({
         >
           {removeSavedPalleteItem ? "-" : "+"}
         </span>
-        <span className={savedSpanClasses.join(" ")}>Saved</span>
-        <span className={copiedSpanClasses.join(" ")}>Copied</span>
+        <span
+          style={{ bottom: "-2.5rem" }}
+          className={savedSpanClasses.join(" ")}
+        >
+          Saved
+        </span>
+        <span
+          style={{ bottom: "-2.5rem" }}
+          className={copiedSpanClasses.join(" ")}
+        >
+          Copied
+        </span>
       </div>
-      <span style={{ color: originalBackground }}>{originalBackground}</span>
     </div>
   );
 };
 
-export default NormalPalleteItem;
+export default ShadesPalleteItem;
