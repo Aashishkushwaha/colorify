@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const useAppInit = () => {
+  const [showSideBar, setShowSideBar] = useState(false);
   const [normalPalleteRotate, setNormalPalleteRotate] = useState("rotate-left");
   const [savedPalleteItems, setSavedPalleteItems] = useState(
     JSON.parse(localStorage.getItem("savedPalleteItems")) || []
@@ -30,13 +31,18 @@ const useAppInit = () => {
     ["#61f3c3", "#4772b2"],
   ]);
 
-  // const [currentShadesPallete, setCurrentShadesPallete] = useState([
-  //   "#414141",
-  //   "#ba23a1",
-  //   "#48b124",
-  //   "#b1449c",
-  //   "#b123ff"
-  // ]);
+  const [currentShadesPallete, setCurrentShadesPallete] = useState([
+    [41, 41, 41],
+    [28, 118, 208],
+    [45, 154, 92],
+    [214, 117, 88],
+    [71, 114, 178],
+    [138, 223, 168],
+    [217, 208, 135],
+    [233, 142, 131],
+    [60, 104, 186],
+    [198, 159, 41],
+  ]);
 
   const copyColor = (color) => {
     var tempInput = document.createElement("input");
@@ -47,14 +53,25 @@ const useAppInit = () => {
     document.body.removeChild(tempInput);
   };
 
-  const generateColor = () => {
-    return (
-      "#" +
-      Math.floor(Math.random() * 255).toString(16) +
-      Math.floor(Math.random() * 255).toString(16) +
-      Math.floor(Math.random() * 255).toString(16)
-    );
+  let generateHexCode = () => {
+    let code = Math.floor(Math.random() * 255).toString(16);
+    return code.length === 1 ? (code = `0${code}`) : code;
   };
+
+  let getHexCode = (number) => {
+    let code = Math.floor(number).toString(16);
+    return code.length === 1 ? (code = `0${code}`) : code;
+  };
+
+  const generateColor = () => {
+    return "#" + generateHexCode() + generateHexCode() + generateHexCode();
+  };
+
+  const generateRGB = () => [
+    Math.floor(Math.random() * 255),
+    Math.floor(Math.random() * 255),
+    Math.floor(Math.random() * 255),
+  ];
 
   const normalPalleteHandler = () => {
     setNormalPalleteRotate(
@@ -69,12 +86,24 @@ const useAppInit = () => {
     );
   };
 
+  const shadesPalleteHandler = () => {
+    setCurrentShadesPallete(Array.from({ length: 10 }, generateRGB));
+  };
+
   const generatePallete = (palleteType) => {
     if (palleteType === "normal") normalPalleteHandler();
     else if (palleteType === "gradient") gradientPalleteHandler();
+    else if (palleteType === "shades") shadesPalleteHandler();
+  };
+
+  const drawerHandler = () => {
+    setShowSideBar(!showSideBar);
   };
 
   return [
+    showSideBar,
+    drawerHandler,
+    getHexCode,
     copyColor,
     normalPalleteRotate,
     currentNormalPallete,
@@ -82,6 +111,7 @@ const useAppInit = () => {
     currentGradientPallete,
     savedPalleteItems,
     setSavedPalleteItems,
+    currentShadesPallete,
   ];
 };
 

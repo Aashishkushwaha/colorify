@@ -11,7 +11,7 @@ const GradientPalleteRow = ({ currentGradientPallete, generatePallete }) => {
         className="btn btn-blue rounded"
         onClick={() => generatePallete("gradient")}
       >
-        Next
+        Generate Pallete
       </button>
     </div>
   );

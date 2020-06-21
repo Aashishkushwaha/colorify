@@ -3,24 +3,27 @@ import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
 
 const GradientPalleteItem = ({
+  index,
+  disableLock,
   primaryBackground,
   secondaryBackground,
   removeSavedPalleteItem,
-  index,
 }) => {
   const { copyColor } = useContext(CopyContext);
   const { savedPalleteItems, setSavedPalleteItems } = useContext(
     SavedPalleteItemsContext
   );
-
-  let style = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    background: `linear-gradient(to bottom right, ${primaryBackground}, ${secondaryBackground})`,
-  };
-  let assignedClasses = ["pallete-item", "rounded"];
+  const [isLocked, setIsLocked] = useState(false);
+  let [hasSavedClass, setHasSavedClass] = useState(false);
+  let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
+  let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
+  const [originalPrimaryBackground, setOriginalPrimaryBackground] = useState(
+    ""
+  );
+  const [
+    originalSecondaryBackground,
+    setOriginalSecondaryBackground,
+  ] = useState("");
 
   const [palleteClasses, setPalleteClasses] = useState(["shutter"]);
   let [copiedLowerSpanClasses, setCopiedLowerSpanClasses] = useState([
@@ -36,9 +39,15 @@ const GradientPalleteItem = ({
     "copied-down",
   ]);
 
-  let [lowerSpanHasShowClass, setLowerSpanHasShowClass] = useState(false);
-  let [upperSpanHasShowClass, setUpperSpanHasShowClass] = useState(false);
-  let [hasSavedClass, setHasSavedClass] = useState(false);
+  let style = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: `linear-gradient(to bottom right, ${originalPrimaryBackground}, ${originalSecondaryBackground})`,
+  };
+
+  let assignedClasses = ["pallete-item", "rounded"];
 
   useEffect(() => {
     !hasSavedClass
@@ -106,6 +115,11 @@ const GradientPalleteItem = ({
   };
 
   useEffect(() => {
+    if (!isLocked) {
+      setOriginalPrimaryBackground(primaryBackground);
+      setOriginalSecondaryBackground(secondaryBackground);
+    }
+
     let timer = setTimeout(() => {
       setPalleteClasses(["shutter show-shutter"]);
     }, 50);
@@ -128,12 +142,23 @@ const GradientPalleteItem = ({
   return (
     <div className={assignedClasses.join(" ")} style={{ position: "relative" }}>
       <span
-        onClick={(event) => handler(event, primaryBackground, "upper")}
-        style={{ color: primaryBackground }}
+        onClick={(event) => handler(event, originalPrimaryBackground, "upper")}
+        style={{ color: originalPrimaryBackground }}
       >
-        {primaryBackground}
+        {originalPrimaryBackground}
       </span>
       <div style={style}>
+        {!disableLock && (
+          <span
+            className="lock__unlock"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsLocked(!isLocked);
+            }}
+          >
+            {isLocked ? "Unlock" : "Lock"}
+          </span>
+        )}
         <span
           className="pallete-item__save"
           onClick={(e) => {
@@ -150,10 +175,12 @@ const GradientPalleteItem = ({
         <span className={copiedLowerSpanClasses.join(" ")}>Copied</span>
       </div>
       <span
-        onClick={(event) => handler(event, secondaryBackground, "lower")}
-        style={{ color: secondaryBackground }}
+        onClick={(event) =>
+          handler(event, originalSecondaryBackground, "lower")
+        }
+        style={{ color: originalSecondaryBackground }}
       >
-        {secondaryBackground}
+        {originalSecondaryBackground}
       </span>
     </div>
   );
