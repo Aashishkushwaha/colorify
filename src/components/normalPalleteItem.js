@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
+import openedLock from "../assets/img/opened_lock.svg";
+import closedLock from "../assets/img/closed_lock.svg";
 
 const NormalPalleteItem = ({
   disableLock,
@@ -105,7 +107,13 @@ const NormalPalleteItem = ({
               setIsLocked(!isLocked);
             }}
           >
-            {isLocked ? "Unlock" : "Lock"}
+            <img
+              style={{
+                opacity: !isLocked ? 0.5 : 1,
+              }}
+              src={isLocked ? closedLock : openedLock}
+              alt="locked/unlocked"
+            />
           </span>
         )}
         <span
