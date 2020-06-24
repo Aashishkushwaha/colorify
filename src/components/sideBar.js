@@ -8,7 +8,7 @@ const SideBar = ({ showSideBar }) => {
 
   return (
     <ul className={assignedClasses.join(" ")}>
-      <h2 style={{ marginBottom: "1rem" }}>
+      <li style={{ marginBottom: "1rem", fontWeight: "800" }}>
         <Link to="/">
           <img
             style={{ height: "1rem", margin: "0 .3rem" }}
@@ -17,7 +17,7 @@ const SideBar = ({ showSideBar }) => {
           />
           Colorify
         </Link>
-      </h2>
+      </li>
       <li>
         <NavLink className="" to="/normal">
           Normal

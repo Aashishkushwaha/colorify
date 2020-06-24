@@ -9,10 +9,8 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-  <meta name="description" content="Modern PWA application using React.js" />
-  <link rel="apple-touch-icon" href="./images/main-logo.png">
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="shortcut icon" type="image/png" href="./images/logo_192.png" />
+  <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+  <link rel="shortcut icon" href="./favicon.ico" />
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -23,13 +21,56 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Colorify</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    main,
+    #root {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main {
+      height: 100vh;
+    }
+
+    #root {
+      width: 40rem;
+      max-width: 90vw;
+      margin: 0 auto;
+      padding: .6rem 1rem;
+      border-radius: .4rem;
+      text-align: center;
+    }
+
+    .heading {
+      background: linear-gradient(to right bottom, #417447, #6fd88d);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
 </head>
 
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <div id="root"></div>
+  <main>
+    <section id="root">
+      <div class="heading">
+        <h1>Colorify</h1>
+        <h3>Please check you internet connection, & explore the world of Colorify.</h3>
+        <p>Perfect destination for delightful colors.</p>
+      </div>
+    </section>
+  </main>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -40,17 +81,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./serviceworker.js')
-          .then(registration => {
-            console.log("success", registration.scope);
-          })
-          .catch(error => console.log("failure", error));
-      })
-    }
-  </script>
 </body>
 
 </html>
