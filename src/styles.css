@@ -128,7 +128,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .grid {
-  gap: 1rem;
+  gap: 1rem 0.3rem;
   width: 95vw;
   display: grid;
   margin: 0 auto;
@@ -148,6 +148,7 @@ input[type="color"]::-webkit-color-swatch {
   padding: 0.5rem;
   background: #fff;
   transition: all 0.4s;
+  margin: 0 0.5rem;
 }
 
 .pallete-item__save {
@@ -172,7 +173,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .pallete-item:hover {
-  transform: scale(1.03);
+  transform: scale(1.015);
   box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.15);
 }
 
@@ -191,15 +192,15 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .lock__unlock {
-  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  background: white;
-  padding: 0.4rem 0.8rem;
-  transition: opacity 0.8s;
 }
 
-.pallete-item > div:hover .lock__unlock {
-  opacity: 1;
+.lock__unlock > img {
+  height: 3.5rem;
+  transition: opacity 0.8s;
 }
 
 .heading {

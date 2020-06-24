@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
+import openedLock from "../assets/img/opened_lock_black.svg";
+import closedLock from "../assets/img/closed_lock_black.svg";
 
 const ShadesPalleteItem = ({
   disableLock,
@@ -100,9 +102,7 @@ const ShadesPalleteItem = ({
         {!disableLock && (
           <span
             style={{
-              background: "#414141",
-              color: "#fff",
-              marginBottom: ".5rem",
+              marginBottom: ".4rem",
             }}
             className="lock__unlock rounded"
             onClick={(e) => {
@@ -110,7 +110,14 @@ const ShadesPalleteItem = ({
               setIsLocked(!isLocked);
             }}
           >
-            {isLocked ? "Unlock" : "Lock"}
+            <img
+              style={{
+                opacity: !isLocked ? 0.5 : 1,
+                height: "2rem",
+              }}
+              src={isLocked ? closedLock : openedLock}
+              alt="locked/unlocked"
+            />
           </span>
         )}
         {new Array(10).fill(1).map((el, index) => (

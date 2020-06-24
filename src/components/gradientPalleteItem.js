@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import CopyContext from "../context/CopyContext";
 import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
+import openedLock from "../assets/img/opened_lock.svg";
+import closedLock from "../assets/img/closed_lock.svg";
 
 const GradientPalleteItem = ({
   index,
@@ -156,7 +158,13 @@ const GradientPalleteItem = ({
               setIsLocked(!isLocked);
             }}
           >
-            {isLocked ? "Unlock" : "Lock"}
+            <img
+              style={{
+                opacity: !isLocked ? 0.5 : 1,
+              }}
+              src={isLocked ? closedLock : openedLock}
+              alt="locked/unlocked"
+            />
           </span>
         )}
         <span
