@@ -3,13 +3,13 @@ import React from "react";
 const footer = (porps) => {
   return (
     <div className="footer">
-      <h3>
+      <span style={{ fontWeight: 600 }}>
         Crafted with{" "}
         <span role="img" aria-label="blue heart">
           💙
         </span>{" "}
         and React.
-      </h3>
+      </span>
       <p>
         Designed by{" "}
         <a
