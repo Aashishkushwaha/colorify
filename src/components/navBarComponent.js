@@ -26,7 +26,7 @@ export default ({ onClickHandler }) => {
           <Link
             className="main-header__list-item"
             to="/"
-            style={{ color: "#c1c1c1" }}
+            style={{ color: "#e1e1e1" }}
           >
             <img
               style={{ height: "1rem", margin: "0 .3rem" }}
