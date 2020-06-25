@@ -35,7 +35,8 @@ const NormalPalleteItem = ({
     background: originalBackground,
     cursor: "pointer",
   };
-  let assignedClasses = ["pallete-item", "rounded", "rotate", rotate];
+  let assignedClasses = ["pallete-item", "rounded", "rotate"];
+  if (!isLocked) assignedClasses.push(rotate);
 
   useEffect(() => {
     !hasSavedClass
@@ -129,7 +130,7 @@ const NormalPalleteItem = ({
         <span className={savedSpanClasses.join(" ")}>Saved</span>
         <span className={copiedSpanClasses.join(" ")}>Copied</span>
       </div>
-      <span style={{ color: originalBackground }}>{originalBackground}</span>
+      <span style={{ color: "#414141" }}>{originalBackground}</span>
     </div>
   );
 };

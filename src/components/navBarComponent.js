@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import mainLogo from "../assets/img/main-logo.png";
+import mainLogo from "../assets/img/main-logo.svg";
+import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
+
+/**
+ * Environment property file
+ * dev - dev
+ * UAT - business people ()
+ * Prod -
+ *
+ *
+ * Unit test cases in React
+ */
 
 export default ({ onClickHandler }) => {
+  const { savedPalleteItems } = useContext(SavedPalleteItemsContext);
+
   return (
     <header className="main-header">
       <div onClick={onClickHandler}>
@@ -42,7 +55,25 @@ export default ({ onClickHandler }) => {
           </li>
           <li>
             <NavLink className="main-header__list-item" to="/saved">
-              Saved
+              <span
+                style={{
+                  position: "relative",
+                }}
+              >
+                Saved
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-1rem",
+                    right: "-1rem",
+                    background: "#3f51b5",
+                    color: "#fff",
+                    borderRadius: ".3rem",
+                  }}
+                >
+                  ({savedPalleteItems.length})
+                </span>
+              </span>
             </NavLink>
           </li>
         </ul>

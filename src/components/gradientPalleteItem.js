@@ -123,7 +123,7 @@ const GradientPalleteItem = ({
     }
 
     let timer = setTimeout(() => {
-      setPalleteClasses(["shutter show-shutter"]);
+      !isLocked && setPalleteClasses(["shutter show-shutter"]);
     }, 50);
 
     return () => {
@@ -145,7 +145,7 @@ const GradientPalleteItem = ({
     <div className={assignedClasses.join(" ")} style={{ position: "relative" }}>
       <span
         onClick={(event) => handler(event, originalPrimaryBackground, "upper")}
-        style={{ color: originalPrimaryBackground }}
+        style={{ color: "#414141" }}
       >
         {originalPrimaryBackground}
       </span>
@@ -186,7 +186,7 @@ const GradientPalleteItem = ({
         onClick={(event) =>
           handler(event, originalSecondaryBackground, "lower")
         }
-        style={{ color: originalSecondaryBackground }}
+        style={{ color: "#414141" }}
       >
         {originalSecondaryBackground}
       </span>

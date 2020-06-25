@@ -51,7 +51,6 @@ export default function App(props) {
 
   return (
     <Router>
-      {<SideBar showSideBar={showSideBar} />}
       {showSideBar && (
         <>
           <Suspense fallback={<h1 className="heading">Backdrop</h1>}>
@@ -60,11 +59,12 @@ export default function App(props) {
         </>
       )}
 
-      <NavBar showSideBar={showSideBar} onClickHandler={drawerHandler} />
       <SavedPalleteItemsContext.Provider
         value={{ savedPalleteItems, setSavedPalleteItems }}
       >
         <CopyContext.Provider value={{ copyColor, getHexCode }}>
+          {<SideBar showSideBar={showSideBar} />}
+          <NavBar showSideBar={showSideBar} onClickHandler={drawerHandler} />
           <div className="App">
             <h3 className="heading mt-3">Colorify</h3>
             <span className="heading mb-1 inline-block">

@@ -143,11 +143,21 @@ const ShadesPalleteItem = ({
               }, ${originalBackground[2]}, ${(index + 1) / 10})`,
             }}
           >
-            #
-            {getHexCode(originalBackground[0]) +
-              getHexCode(originalBackground[1]) +
-              getHexCode(originalBackground[2]) +
-              Math.floor(((index + 1) / 10) * 255).toString(16)}
+            <span
+              style={{
+                background: "rgba(255, 255, 255, .7)",
+                color: "#414141",
+                padding: ".2rem .25rem",
+                borderRadius: "1rem",
+                display: "inline-block",
+              }}
+            >
+              #
+              {getHexCode(originalBackground[0]) +
+                getHexCode(originalBackground[1]) +
+                getHexCode(originalBackground[2]) +
+                Math.floor(((index + 1) / 10) * 255).toString(16)}
+            </span>
           </span>
         ))}
         <span

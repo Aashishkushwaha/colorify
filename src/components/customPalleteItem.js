@@ -113,13 +113,18 @@ const CustomPalleteItem = ({ removeSavedPalleteItem, index }) => {
 
   return (
     <div style={{ width: "20rem", margin: "0 auto", marginTop: "1.2rem" }}>
-      <input
-        type="color"
-        name="primary"
-        id="primaryBackground"
-        value={primaryBackground}
-        onChange={(e) => setPrimaryBackground(e.target.value)}
-      />
+      <div className="customColor">
+        <label htmlFor="primaryBackground" style={{ margin: ".3rem 0" }}>
+          Change
+        </label>
+        <input
+          type="color"
+          name="primary"
+          id="primaryBackground"
+          value={primaryBackground}
+          onChange={(e) => setPrimaryBackground(e.target.value)}
+        />
+      </div>
       <div
         className={assignedClasses.join(" ")}
         style={{ position: "relative" }}
@@ -130,7 +135,7 @@ const CustomPalleteItem = ({ removeSavedPalleteItem, index }) => {
         >
           {primaryBackground}
         </span>
-        <div style={style}>
+        <div className="custom_color_pallete_item" style={style}>
           <span
             className="pallete-item__save"
             onClick={(e) => {
@@ -152,13 +157,18 @@ const CustomPalleteItem = ({ removeSavedPalleteItem, index }) => {
           {secondaryBackground}
         </span>
       </div>
-      <input
-        type="color"
-        name="secondary"
-        id="secondaryBackground"
-        value={secondaryBackground}
-        onChange={(e) => setSecondaryBackground(e.target.value)}
-      />
+      <div className="customColor">
+        <input
+          type="color"
+          name="secondary"
+          id="secondaryBackground"
+          value={secondaryBackground}
+          onChange={(e) => setSecondaryBackground(e.target.value)}
+        />
+        <label htmlFor="secondaryBackground" style={{ margin: ".3rem 0" }}>
+          Change
+        </label>
+      </div>
     </div>
   );
 };
