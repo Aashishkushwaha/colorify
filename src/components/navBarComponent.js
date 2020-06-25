@@ -1,6 +1,16 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import mainLogo from "../assets/img/main-logo.png";
+import mainLogo from "../assets/img/main-logo.svg";
+
+/**
+ * Environment property file
+ * dev - dev
+ * UAT - business people ()
+ * Prod -
+ *
+ *
+ * Unit test cases in React
+ */
 
 export default ({ onClickHandler }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import mainLogo from "../assets/img/main-logo.png";
+import mainLogo from "../assets/img/main-logo.svg";
 
 const SideBar = ({ showSideBar }) => {
   let styles = {};

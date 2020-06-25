@@ -129,7 +129,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .grid {
   gap: 1rem 0.3rem;
-  width: 95vw;
+  width: 98vw;
   display: grid;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
@@ -148,7 +148,7 @@ input[type="color"]::-webkit-color-swatch {
   padding: 0.5rem;
   background: #fff;
   transition: all 0.4s;
-  margin: 0 0.5rem;
+  margin: 0 0.25rem;
 }
 
 .pallete-item__save {
