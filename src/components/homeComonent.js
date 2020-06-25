@@ -8,10 +8,10 @@ export default (props) => {
   return (
     <div className="home-grid">
       <div>
-        <NormalPalleteItem background="#d9d087" disableLock={true} />
+        <NormalPalleteItem background="#58bf82" disableLock={true} />
         <h2
           style={{
-            color: "#d9d087",
+            color: "#717171",
             marginTop: "1rem",
             marginBottom: "1rem",
           }}
@@ -29,9 +29,7 @@ export default (props) => {
         />
         <h2
           style={{
-            background: `linear-gradient(to right, #61f3c3, #4772b2)`,
-            color: "transparent",
-            WebkitBackgroundClip: "text",
+            color: "#717171",
             marginTop: "1rem",
             marginBottom: "1rem",
           }}
@@ -45,9 +43,7 @@ export default (props) => {
         <ShadesPalleteItem background={[41, 41, 41]} disableLock={true} />
         <h2
           style={{
-            background: `linear-gradient(to right, rgba(41,41,41,0), rgba(41,41,41,1))`,
-            color: "transparent",
-            WebkitBackgroundClip: "text",
+            color: "#717171",
             marginTop: "1rem",
             marginBottom: "1rem",
           }}

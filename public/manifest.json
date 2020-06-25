@@ -3,19 +3,19 @@
   "name": "Colorify-React",
   "icons": [
     {
-      "src": "/images/main-logo.png",
-      "type": "image/png",
+      "src": "/images/main-logo.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     },
     {
-      "src": "/images/logo_192.png",
-      "type": "image/png",
+      "src": "/images/logo_192.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "/images/maskable_icon.png",
+      "src": "/images/maskable_icon.svg",
       "sizes": "196x196",
-      "type": "image/png",
+      "type": "image/svg",
       "purpose": "maskable"
     }
   ],

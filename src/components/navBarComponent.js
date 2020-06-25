@@ -23,7 +23,11 @@ export default ({ onClickHandler }) => {
       </div>
       <nav className="main-header__nav">
         <h2>
-          <Link className="main-header__list-item" to="/">
+          <Link
+            className="main-header__list-item"
+            to="/"
+            style={{ color: "#c1c1c1" }}
+          >
             <img
               style={{ height: "1rem", margin: "0 .3rem" }}
               src={mainLogo}
