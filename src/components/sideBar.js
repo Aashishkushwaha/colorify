@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import mainLogo from "../assets/img/main-logo.svg";
+import SavedPalleteItemsContext from "../context/SavedPalleteItemsContext";
 
 const SideBar = ({ showSideBar }) => {
-  let styles = {};
+  const { savedPalleteItems } = useContext(SavedPalleteItemsContext);
   let assignedClasses = showSideBar ? ["sidebar show-sidebar"] : ["sidebar"];
 
   return (
@@ -40,7 +41,27 @@ const SideBar = ({ showSideBar }) => {
       </li>
       <li>
         <NavLink className="" to="/saved">
-          Saved
+          <span>Saved</span>
+          {/* style={{
+            marginLeft: "1.2rem",
+            width: "1rem",
+            height: "1rem",
+            background: "tomato",
+            color: "#fff",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%", */}
+          <span
+            style={{
+              marginLeft: ".2rem",
+              background: "#3f51b5",
+              borderRadius: ".3rem",
+              color: "#fff",
+            }}
+          >
+            ({savedPalleteItems.length})
+          </span>
         </NavLink>
       </li>
     </ul>

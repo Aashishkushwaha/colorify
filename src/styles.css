@@ -12,6 +12,14 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+div.customColor {
+  display: flex;
+  flex-direction: column;
+  margin: 0.8rem 0;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 input[type="color"] {
   -webkit-appearance: none;
   border: none;
@@ -20,7 +28,6 @@ input[type="color"] {
   border-radius: 50%;
   outline: none;
   background: none;
-  margin: 0.8rem 0;
   box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.5);
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
@@ -147,7 +154,7 @@ input[type="color"]::-webkit-color-swatch {
 .pallete-item {
   padding: 0.5rem;
   background: #fff;
-  transition: all 0.4s;
+  transition: all 0.2s;
   margin: 0 0.25rem;
 }
 
@@ -248,7 +255,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .btn-blue {
-  background: dodgerblue;
+  background: #3f51b5;
 }
 
 .rotate {
@@ -256,7 +263,8 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .rotate-right {
-  transform: rotateY(360deg);
+  /* transform: rotateY(360deg); */
+  transform: rotateY(1080deg);
 }
 
 .rotate-left {
@@ -302,7 +310,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .show-shutter {
-  animation: shutter 0.5s ease-in-out;
+  animation: shutter 0.3s ease-in-out;
 }
 
 .shades__container {
@@ -361,11 +369,15 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 @keyframes shutter {
-  20% {
+  20%,
+  50%,
+  80% {
     max-height: 143%;
     opacity: 1;
   }
 
+  35%,
+  65%,
   100% {
     max-height: 0%;
     opacity: 0.8;
@@ -411,7 +423,11 @@ input[type="color"]::-webkit-color-swatch {
   }
 
   .pallete-item > div {
-    padding: 5rem 0;
+    padding: 3rem 0;
+  }
+
+  .pallete-item > div.custom_color_pallete_item {
+    padding: 6rem 0;
   }
 
   .grid {
