@@ -22,12 +22,8 @@ export default ({ onClickHandler }) => {
         <span className="hamberger"></span>
       </div>
       <nav className="main-header__nav">
-        <h1>
-          <Link
-            className="main-header__list-item"
-            to="/"
-            style={{ fontWeight: "300" }}
-          >
+        <h2>
+          <Link className="main-header__list-item" to="/">
             <img
               style={{ height: "1rem", margin: "0 .3rem" }}
               src={mainLogo}
@@ -35,7 +31,7 @@ export default ({ onClickHandler }) => {
             />
             Colorify
           </Link>
-        </h1>
+        </h2>
         <ul className="main-header__items-list">
           <li>
             <NavLink className="main-header__list-item" to="/normal">
