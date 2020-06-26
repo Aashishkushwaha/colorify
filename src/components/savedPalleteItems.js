@@ -13,10 +13,12 @@ const SavedPalleteItems = ({ palletes }) => {
 
   useEffect(() => {
     let tempPalleteItems = { ...initialPalleteItems };
-    palletes.map((pallete) => {
-      if (pallete.length > 1) tempPalleteItems.gradient.push(pallete);
-      else if (Array.isArray(pallete[0])) tempPalleteItems.shades.push(pallete);
-      else tempPalleteItems.normal.push(pallete);
+    palletes.map((pallete, index) => {
+      if (pallete.length > 1)
+        tempPalleteItems.gradient.push({ pallete, index });
+      else if (Array.isArray(pallete[0]))
+        tempPalleteItems.shades.push({ pallete, index });
+      else tempPalleteItems.normal.push({ pallete, index });
       return null;
     });
     setPalleteItems({ ...palleteItems, ...tempPalleteItems });
@@ -25,12 +27,12 @@ const SavedPalleteItems = ({ palletes }) => {
   return palletes.length ? (
     <div>
       <div className="grid" style={{ marginBottom: "1.4rem" }}>
-        {palleteItems.normal.map((pallete, index) => {
+        {palleteItems.normal.map((item) => {
           return (
             <NormalPalleteItem
-              index={index}
-              key={index}
-              background={pallete[0]}
+              index={item.index}
+              key={item.index}
+              background={item.pallete[0]}
               removeSavedPalleteItem={true}
               disableLock={true}
             />
@@ -38,13 +40,13 @@ const SavedPalleteItems = ({ palletes }) => {
         })}
       </div>
       <div className="grid" style={{ marginBottom: "1.4rem" }}>
-        {palleteItems.gradient.map((pallete, index) => {
+        {palleteItems.gradient.map((item) => {
           return (
             <GradientPalleteItem
-              index={index}
-              key={index}
-              primaryBackground={pallete[0]}
-              secondaryBackground={pallete[1]}
+              index={item.index}
+              key={item.index}
+              primaryBackground={item.pallete[0]}
+              secondaryBackground={item.pallete[1]}
               removeSavedPalleteItem={true}
               disableLock={true}
             />
@@ -52,12 +54,12 @@ const SavedPalleteItems = ({ palletes }) => {
         })}
       </div>
       <div className="grid" style={{ marginBottom: "1.4rem" }}>
-        {palleteItems.shades.map((pallete, index) => {
+        {palleteItems.shades.map((item) => {
           return (
             <ShadesPalleteItem
-              key={index}
-              index={index}
-              background={pallete[0]}
+              key={item.index}
+              index={item.index}
+              background={item.pallete[0]}
               removeSavedPalleteItem={true}
               disableLock={true}
             />
