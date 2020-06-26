@@ -1,6 +1,6 @@
 import React from "react";
 
-const pageNotFound = ({ match, location, history }) => {
+const pageNotFound = ({ location }) => {
   return (
     <div
       style={{

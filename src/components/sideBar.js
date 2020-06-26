@@ -42,16 +42,6 @@ const SideBar = ({ showSideBar }) => {
       <li>
         <NavLink className="" to="/saved">
           <span>Saved</span>
-          {/* style={{
-            marginLeft: "1.2rem",
-            width: "1rem",
-            height: "1rem",
-            background: "tomato",
-            color: "#fff",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "50%", */}
           <span
             style={{
               marginLeft: ".2rem",

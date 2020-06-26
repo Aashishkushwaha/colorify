@@ -9,11 +9,11 @@ import useAppInit from "./hooks/useAppSetup";
 import CopyContext from "./context/CopyContext";
 import SavedPalleteItemsContext from "./context/SavedPalleteItemsContext";
 import "./styles.css";
-import SideBar from "./components/sideBar";
 
 const Home = React.lazy(() => import("./components/homeComonent"));
 
 const Backdrop = React.lazy(() => import("./components/backdrop"));
+const SideBar = React.lazy(() => import("./components/sideBar"));
 
 const SavedPalleteItems = React.lazy(() =>
   import("./components/savedPalleteItems")
@@ -63,7 +63,11 @@ export default function App(props) {
         value={{ savedPalleteItems, setSavedPalleteItems }}
       >
         <CopyContext.Provider value={{ copyColor, getHexCode }}>
-          {<SideBar showSideBar={showSideBar} />}
+          {
+            <Suspense fallback="">
+              <SideBar showSideBar={showSideBar} />
+            </Suspense>
+          }
           <NavBar showSideBar={showSideBar} onClickHandler={drawerHandler} />
           <div className="App">
             <h3 className="heading mt-3">Colorify</h3>
